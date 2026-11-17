@@ -1,0 +1,83 @@
+:root {
+  color-scheme: light dark;
+  font: menu;
+  --surface: light-dark(#ffffff, #292929);
+  --surface-raised: light-dark(#f5f5f5, #353535);
+  --surface-hover: light-dark(#ececef, #3a3a3a);
+  --border: light-dark(#d8d8d8, #4a4a4a);
+  --muted: light-dark(#656565, #b1b1b1);
+  --accent: light-dark(#0060df, #75baff);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { width: 100%; margin: 0; color: light-dark(#1c1b1f, #f1f1f1); background: var(--surface); font-size: 14px; }
+main { padding: 16px; }
+
+/* Header */
+header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+header > div { display: grid; gap: 3px; }
+.eyebrow { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+header strong { font-size: 22px; font-weight: 650; letter-spacing: -.02em; }
+.icon-button { width: 36px; height: 36px; padding: 0; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; background: transparent; }
+.icon-button:hover { background: var(--surface-hover); }
+
+/* Search */
+.search-wrap { display: flex; gap: 8px; align-items: center; width: 100%; padding: 0 12px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-raised); }
+.search-wrap span { color: var(--muted); font-size: 20px; flex-shrink: 0; }
+#command-search { flex: 1; min-width: 0; height: 40px; border: 0; outline: 0; background: transparent; font: inherit; color: inherit; }
+
+/* Section headings */
+h2 { margin: 18px 0 8px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+
+/* Buttons / inputs base */
+button, input, select { box-sizing: border-box; min-height: 40px; border: 1px solid var(--border); border-radius: 8px; color: inherit; background: var(--surface); font: inherit; }
+button { cursor: pointer; }
+button:hover, select:hover { background: var(--surface-hover); }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+input, select { min-width: 0; padding: 0 10px; }
+
+/* Actions & workspaces */
+#actions, #workspaces { display: grid; gap: 5px; }
+#actions button, #workspaces button { position: relative; width: 100%; min-height: 44px; padding: 0 14px; text-align: start; }
+#actions button { background: var(--surface-raised); font-weight: 600; }
+#actions button.danger { color: light-dark(#a4000f, #ffb4ab); background: transparent; }
+#workspaces button { padding-left: 18px; }
+#workspaces button::before { content: ""; position: absolute; top: 11px; bottom: 11px; left: 7px; width: 3px; border-radius: 3px; background: transparent; }
+#workspaces button[aria-current="true"] { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); background: color-mix(in srgb, var(--accent) 13%, var(--surface)); color: var(--accent); font-weight: 650; }
+#workspaces button[aria-current="true"]::before { background: var(--accent); }
+button .shortcut { float: right; margin-top: 1px; color: var(--muted); font-size: 11px; font-weight: 500; }
+
+/* Collapsible sections */
+.traffic-control, .duplicate-control, .create-workspace-control { margin-top: 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-raised); }
+.traffic-control summary, .duplicate-control summary, .create-workspace-control summary { display: flex; justify-content: space-between; align-items: center; padding: 11px 13px; cursor: pointer; font-size: 12px; font-weight: 650; list-style: none; }
+.traffic-control summary::-webkit-details-marker, .duplicate-control summary::-webkit-details-marker, .create-workspace-control summary::-webkit-details-marker { display: none; }
+.traffic-control summary small, .duplicate-control summary small, .create-workspace-control summary small { color: var(--muted); font-size: 11px; font-weight: 400; }
+.traffic-control[open] summary, .duplicate-control[open] summary, .create-workspace-control[open] summary { border-bottom: 1px solid var(--border); }
+
+/* ATC form */
+.traffic-control form { display: grid; grid-template-columns: 120px 1fr; gap: 6px; padding: 11px 12px; margin: 0; }
+.route-destination { grid-column: 1 / -1; color: var(--muted); font-size: 12px; font-weight: 600; margin: 2px 0 -2px; }
+#route-workspace { grid-column: 1 / -1; }
+.traffic-control form button { grid-column: 1 / -1; border-color: transparent; background: var(--accent); color: light-dark(white, #111); font-weight: 650; text-align: center; }
+#route-status { min-height: 14px; margin: 0 12px 8px; color: var(--muted); font-size: 11px; }
+
+/* Duplication control form */
+.duplicate-control form { display: grid; grid-template-columns: 120px 1fr; gap: 6px; padding: 11px 12px; margin: 0; }
+.duplicate-control form button { grid-column: 1 / -1; border-color: transparent; background: var(--accent); color: light-dark(white, #111); font-weight: 650; text-align: center; }
+#duplicate-status { min-height: 14px; margin: 0 12px 8px; color: var(--muted); font-size: 11px; }
+#duplicate-rules { display: grid; gap: 5px; padding: 0 12px 12px; }
+
+/* Route rows */
+#routes { display: grid; gap: 5px; padding: 0 12px 12px; }
+.route { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 6px; align-items: center; padding: 8px 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); font-size: 12px; }
+.route-meta { display: flex; align-items: center; gap: 6px; grid-column: 1; }
+.route-type { padding: 2px 5px; border-radius: 4px; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); font-size: 9px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+.route-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.route-workspace { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.route-actions { display: flex; gap: 4px; }
+.route button { min-height: 28px; padding: 0 8px; color: var(--muted); font-size: 12px; }
+
+/* Create workspace form */
+form#create-workspace { display: flex; gap: 7px; padding: 11px 12px; margin: 0; }
+#workspace-name { flex: 1; }
+form#create-workspace button { border-color: transparent; background: var(--accent); color: light-dark(white, #111); font-weight: 650; padding: 0 14px; }

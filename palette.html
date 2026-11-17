@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="palette.css">
+    <title>Workspace commands</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <span class="eyebrow">WORKSPACE COMMANDS</span>
+          <strong><span id="active-workspace"></span></strong>
+        </div>
+        <button id="close-palette" class="icon-button" type="button" aria-label="Close">×</button>
+      </header>
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="command-search" type="search" placeholder="Search commands and workspaces" autocomplete="off">
+      </div>
+      <section>
+        <h2>Commands</h2>
+        <div id="actions"></div>
+      </section>
+      <section>
+        <h2>Switch To</h2>
+        <div id="workspaces"></div>
+      </section>
+      <details class="traffic-control">
+        <summary><span>Air Traffic Control</span><small>Route links automatically</small></summary>
+        <form id="create-route">
+          <select id="route-type" aria-label="Route match type">
+            <option value="domain">Domain</option>
+            <option value="prefix">URL starts with</option>
+            <option value="exact">Exact URL</option>
+          </select>
+          <input id="route-value" placeholder="glovoapp.com" required>
+          <label class="route-destination" for="route-workspace">Open in</label>
+          <select id="route-workspace" aria-label="Destination workspace"></select>
+          <button type="submit">Add route</button>
+        </form>
+        <p id="route-status" role="status"></p>
+        <div id="routes"></div>
+      </details>
+      <details class="duplicate-control">
+        <summary><span>Duplication Control</span><small>Allow duplicate tabs</small></summary>
+        <form id="create-duplicate-rule">
+          <select id="duplicate-type" aria-label="Duplicate match type">
+            <option value="domain">Domain</option>
+            <option value="prefix">URL starts with</option>
+            <option value="exact">Exact URL</option>
+          </select>
+          <input id="duplicate-value" placeholder="docs.google.com" required>
+          <button type="submit">Allow duplicates</button>
+        </form>
+        <p id="duplicate-status" role="status"></p>
+        <div id="duplicate-rules"></div>
+      </details>
+      <details class="create-workspace-control">
+        <summary><span>Create workspace</span><small>New focused space</small></summary>
+        <form id="create-workspace">
+          <input id="workspace-name" placeholder="Workspace name" maxlength="40" required>
+          <button type="submit">Create</button>
+        </form>
+      </details>
+    </main>
+    <script src="palette.js"></script>
+  </body>
+</html>

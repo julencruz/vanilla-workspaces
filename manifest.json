@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Vanilla Workspaces",
+  "version": "2.6.16",
+  "description": "Minimal workspaces and duplicate-tab prevention for Firefox.",
+  "permissions": ["tabs", "tabHide", "storage", "contextMenus", "sessions", "alarms"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_title": "Workspaces",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "next-workspace": {
+      "suggested_key": {
+        "default": "Command+Shift+Right"
+      },
+      "description": "Switch to the next workspace"
+    },
+    "previous-workspace": {
+      "suggested_key": {
+        "default": "Command+Shift+Left"
+      },
+      "description": "Switch to the previous workspace"
+    },
+    "command-palette": {
+      "suggested_key": {
+        "default": "Command+Shift+K"
+      },
+      "description": "Open workspace command palette"
+    },
+    "open-all-favorites": {
+      "suggested_key": {
+        "default": "Command+Shift+Down"
+      },
+      "description": "Open all favorites in the current workspace"
+    },
+    "add-current-tab-favorite": {
+      "suggested_key": {
+        "default": "Command+Shift+Up"
+      },
+      "description": "Add the current tab to workspace favorites"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "vanilla-workspaces@local",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

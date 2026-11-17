@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="popup.css">
+    <title>Workspaces</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="eyebrow">CURRENT WORKSPACE</span>
+        <h1 id="active-workspace">General</h1>
+      </header>
+      <section class="workspace-section" aria-label="Workspaces">
+        <div class="section-heading">
+          <span>Switch workspace</span>
+          <span id="workspace-count" class="count"></span>
+        </div>
+        <div id="workspaces"></div>
+      </section>
+      <section class="favorites-section">
+        <div class="section-heading">
+          <span>Favorites</span>
+          <button id="open-all-favorites" type="button">Open all</button>
+        </div>
+        <div id="favorites"></div>
+      </section>
+      <details class="manage-workspace">
+        <summary>Manage workspace</summary>
+        <form id="new-workspace">
+          <label class="sr-only" for="workspace-name">New workspace</label>
+          <input id="workspace-name" type="text" placeholder="New workspace" maxlength="40" required>
+          <button type="submit">Add</button>
+        </form>
+        <button id="rename-workspace" class="secondary-action" type="button">Rename current workspace</button>
+        <section class="appearance-section">
+          <label for="workspace-icon">Workspace appearance</label>
+          <div class="appearance-controls">
+            <select id="workspace-icon" aria-label="Workspace icon">
+              <option value="💼">💼 Work</option>
+              <option value="🛠️">🛠️ Debug</option>
+              <option value="⌘">⌘ Development</option>
+              <option value="🌐">🌐 Web</option>
+              <option value="📚">📚 Research</option>
+              <option value="✦">✦ Personal</option>
+              <option value="●">● Minimal</option>
+            </select>
+            <div class="appearance-palette">
+              <div id="workspace-colors" role="group" aria-label="Workspace color">
+                <button type="button" data-color="#0060df" aria-label="Blue"></button>
+                <button type="button" data-color="#00897b" aria-label="Teal"></button>
+                <button type="button" data-color="#6b4eff" aria-label="Purple"></button>
+                <button type="button" data-color="#d14a6b" aria-label="Pink"></button>
+                <button type="button" data-color="#c26a00" aria-label="Orange"></button>
+                <button type="button" data-color="#ffd400" aria-label="Yellow"></button>
+              </div>
+              <button id="save-workspace-style" type="button">Save</button>
+            </div>
+          </div>
+        </section>
+      </details>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
