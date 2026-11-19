@@ -57,6 +57,24 @@
         <p id="duplicate-status" role="status"></p>
         <div id="duplicate-rules"></div>
       </details>
+      <details class="pinned-control">
+        <summary><span>Pinned tabs</span><small>Always present, any workspace</small></summary>
+        <form id="create-pinned">
+          <input id="pinned-url" placeholder="calendar.google.com" required>
+          <button type="submit">Pin</button>
+        </form>
+        <p id="pinned-status" role="status"></p>
+        <div id="pinned-list"></div>
+      </details>
+      <details class="backup-control">
+        <summary><span>Backup</span><small>Export or import configuration</small></summary>
+        <div class="backup-actions">
+          <button id="export-config" type="button">Export</button>
+          <button id="import-config" type="button">Import…</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden>
+        </div>
+        <p id="backup-status" role="status"></p>
+      </details>
       <details class="create-workspace-control">
         <summary><span>Create workspace</span><small>New focused space</small></summary>
         <form id="create-workspace">

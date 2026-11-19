@@ -1,0 +1,21 @@
+import vm from "node:vm"; import fs from "node:fs";
+const dir=new URL("../",import.meta.url).pathname;
+const ctx={Intl,Math,String,parseInt,RegExp};
+vm.createContext(ctx);
+vm.runInContext(fs.readFileSync(dir+"appearance.js","utf8"),ctx);
+const f=n=>vm.runInContext(n,ctx);
+const assert=(c,m)=>{if(!c)throw new Error("FAIL: "+m);console.log("ok -",m)};
+assert(f("clampIcon")("💼")==="💼","emoji kept");
+assert(f("clampIcon")("👨‍👩‍👧‍👦🚀🎮")==="👨‍👩‍👧‍👦🚀","limits to 2 graphemes without splitting emoji");
+assert(f("clampIcon")("abcdef")==="ab","text limited to 2");
+assert(f("clampIcon")("  x ")==="x","trimmed");
+const n=f("normalizeHex");
+assert(n("#AABBCC")==="#aabbcc","normalises case");
+assert(n("abc")==="#aabbcc","3-digit without hash expands");
+assert(n("#12345g")===null&&n("red")===null&&n("")===null,"rejects invalid");
+const rt=f("(h)=>hsvToHex(hexToHsv(h))");
+for(const c of ["#0060df","#ffd400","#000000","#ffffff","#d14a6b","#00897b","#6b4eff","#808080","#ff0000","#00ff00","#0000ff"])
+  assert(rt(c)===c,"HSV round trip "+c);
+assert(f("hsvToHex")({h:360,s:1,v:1})==="#ff0000","hue 360 wraps to red");
+assert(f("readableOn")("#ffd400")==="#1b1b1b"&&f("readableOn")("#0060df")==="#ffffff","readable text colour");
+console.log("ALL OK");

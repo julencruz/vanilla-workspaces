@@ -37,30 +37,23 @@
         <section class="appearance-section">
           <label for="workspace-icon">Workspace appearance</label>
           <div class="appearance-controls">
-            <select id="workspace-icon" aria-label="Workspace icon">
-              <option value="💼">💼 Work</option>
-              <option value="🛠️">🛠️ Debug</option>
-              <option value="⌘">⌘ Development</option>
-              <option value="🌐">🌐 Web</option>
-              <option value="📚">📚 Research</option>
-              <option value="✦">✦ Personal</option>
-              <option value="●">● Minimal</option>
-            </select>
-            <div class="appearance-palette">
-              <div id="workspace-colors" role="group" aria-label="Workspace color">
-                <button type="button" data-color="#0060df" aria-label="Blue"></button>
-                <button type="button" data-color="#00897b" aria-label="Teal"></button>
-                <button type="button" data-color="#6b4eff" aria-label="Purple"></button>
-                <button type="button" data-color="#d14a6b" aria-label="Pink"></button>
-                <button type="button" data-color="#c26a00" aria-label="Orange"></button>
-                <button type="button" data-color="#ffd400" aria-label="Yellow"></button>
-              </div>
+            <div class="appearance-row">
+              <div id="appearance-preview" aria-hidden="true">●</div>
+              <input id="workspace-icon" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="Emoji or 2 characters" aria-label="Workspace icon">
+            </div>
+            <div id="color-picker" aria-label="Workspace color">
+              <div id="color-area" role="slider" tabindex="0" aria-label="Saturation and brightness"><div id="color-area-thumb"></div></div>
+              <div id="hue-slider" role="slider" tabindex="0" aria-label="Hue" aria-valuemin="0" aria-valuemax="360"><div id="hue-thumb"></div></div>
+            </div>
+            <div class="appearance-row">
+              <input id="workspace-color-hex" type="text" maxlength="7" autocomplete="off" spellcheck="false" aria-label="Hex color" placeholder="#0060df">
               <button id="save-workspace-style" type="button">Save</button>
             </div>
           </div>
         </section>
       </details>
     </main>
+    <script src="appearance.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

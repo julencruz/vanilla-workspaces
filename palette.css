@@ -48,11 +48,11 @@ input, select { min-width: 0; padding: 0 10px; }
 button .shortcut { float: right; margin-top: 1px; color: var(--muted); font-size: 11px; font-weight: 500; }
 
 /* Collapsible sections */
-.traffic-control, .duplicate-control, .create-workspace-control { margin-top: 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-raised); }
-.traffic-control summary, .duplicate-control summary, .create-workspace-control summary { display: flex; justify-content: space-between; align-items: center; padding: 11px 13px; cursor: pointer; font-size: 12px; font-weight: 650; list-style: none; }
-.traffic-control summary::-webkit-details-marker, .duplicate-control summary::-webkit-details-marker, .create-workspace-control summary::-webkit-details-marker { display: none; }
-.traffic-control summary small, .duplicate-control summary small, .create-workspace-control summary small { color: var(--muted); font-size: 11px; font-weight: 400; }
-.traffic-control[open] summary, .duplicate-control[open] summary, .create-workspace-control[open] summary { border-bottom: 1px solid var(--border); }
+.traffic-control, .duplicate-control, .pinned-control, .backup-control, .create-workspace-control { margin-top: 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface-raised); }
+.traffic-control summary, .duplicate-control summary, .pinned-control summary, .backup-control summary, .create-workspace-control summary { display: flex; justify-content: space-between; align-items: center; padding: 11px 13px; cursor: pointer; font-size: 12px; font-weight: 650; list-style: none; }
+.traffic-control summary::-webkit-details-marker, .duplicate-control summary::-webkit-details-marker, .pinned-control summary::-webkit-details-marker, .backup-control summary::-webkit-details-marker, .create-workspace-control summary::-webkit-details-marker { display: none; }
+.traffic-control summary small, .duplicate-control summary small, .pinned-control summary small, .backup-control summary small, .create-workspace-control summary small { color: var(--muted); font-size: 11px; font-weight: 400; }
+.traffic-control[open] summary, .duplicate-control[open] summary, .pinned-control[open] summary, .backup-control[open] summary, .create-workspace-control[open] summary { border-bottom: 1px solid var(--border); }
 
 /* ATC form */
 .traffic-control form { display: grid; grid-template-columns: 120px 1fr; gap: 6px; padding: 11px 12px; margin: 0; }
@@ -81,3 +81,9 @@ button .shortcut { float: right; margin-top: 1px; color: var(--muted); font-size
 form#create-workspace { display: flex; gap: 7px; padding: 11px 12px; margin: 0; }
 #workspace-name { flex: 1; }
 form#create-workspace button { border-color: transparent; background: var(--accent); color: light-dark(white, #111); font-weight: 650; padding: 0 14px; }
+.pinned-control form { display: grid; grid-template-columns: 1fr auto; gap: 6px; padding: 11px 12px; margin: 0; }
+.pinned-control form button { border-color: transparent; background: var(--accent); color: light-dark(white, #111); font-weight: 650; text-align: center; }
+#pinned-status { min-height: 14px; margin: 0 12px 8px; color: var(--muted); font-size: 11px; }
+#pinned-list { display: grid; gap: 5px; padding: 0 12px 12px; }
+.backup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 11px 12px 0; }
+#backup-status { min-height: 14px; margin: 8px 12px; color: var(--muted); font-size: 11px; }
