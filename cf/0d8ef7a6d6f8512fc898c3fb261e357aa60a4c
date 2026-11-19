@@ -1,0 +1,45 @@
+manifest.json
+  s_00d0f73575ae3c::t_4261c4804144e5 4
+background/urls.js
+  s_00d0f73575ae3c::t_5be45dbbc00f16 43,45-48,82-83
+  s_00d0f73575ae3c::t_dc91db4a5fdae7 44,49-53
+background/backup.js
+  s_00d0f73575ae3c::t_5be45dbbc00f16 57
+palette.css
+  s_00d0f73575ae3c::t_4f830d5760ee51 88
+tests/backup.test.mjs
+  s_00d0f73575ae3c::t_dcff5adfad3ba8 38,56
+palette.js
+  s_00d0f73575ae3c::t_4f830d5760ee51 176-178,185-192,198-199
+README.md
+  s_00d0f73575ae3c::t_d9110d68352b7a 14
+tests/pinned-duplicates.test.mjs
+  s_00d0f73575ae3c::t_dcff5adfad3ba8 34,59
+  s_00d0f73575ae3c::t_67d4d898eba0b1 13,48-51,54-56
+  s_00d0f73575ae3c::t_9ec801a1ff5f72 46
+  s_00d0f73575ae3c::t_dc91db4a5fdae7 36,41,47,52-53,57-58,60-67
+  s_00d0f73575ae3c::t_de2e0b69416746 68
+background/main.js
+  s_00d0f73575ae3c::t_dc91db4a5fdae7 165-167
+  s_00d0f73575ae3c::t_5be45dbbc00f16 295
+background/pinned.js
+  s_00d0f73575ae3c::t_0cc6726a4e5aa2 42,48
+  s_00d0f73575ae3c::t_5be45dbbc00f16 45,76,83-92
+  s_00d0f73575ae3c::t_13405c6bead400 93-95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "cf0d8ef7a6d6f8512fc898c3fb261e357aa60a4c",
+  "prompts": {},
+  "sessions": {
+    "s_00d0f73575ae3c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e16cda1c8ffeCAMegLWoEYiQOy",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Julen Cruz <139287155+julencruz@users.noreply.github.com>"
+    }
+  }
+}
