@@ -39,11 +39,13 @@ async function runEnsurePinnedTabs(windowId, { force = false }) {
   lastEnsure.set(windowId, now);
 
   const tabs = await browser.tabs.query({ windowId });
+  const claimedTabs = new Set();
   for (const entry of current.pinnedTabs) {
     const key = pinnedKey(entry.url);
-    const matching = tabs.filter(tab => tab.url && pinnedKey(tab.url) === key);
+    const matching = tabs.filter(tab => tab.url && !claimedTabs.has(tab.id) && pinnedEntryMatchesUrl(entry, tab.url));
     const existing = matching.find(tab => tab.pinned) || matching[0];
     if (existing) {
+      claimedTabs.add(existing.id);
       if (!existing.pinned) {
         await browser.tabs.update(existing.id, { pinned: true }).catch(() => {});
       }
@@ -71,9 +73,23 @@ async function addPinnedTab(current, rawUrl) {
     return null;
   }
   if (!current.pinnedTabs.some(entry => pinnedKey(entry.url) === pinnedKey(url))) {
-    current.pinnedTabs.push({ id: crypto.randomUUID(), url });
+    current.pinnedTabs.push({ id: crypto.randomUUID(), url, matchMode: "url" });
     await save(current);
   }
+  await ensurePinnedTabsEverywhere({ force: true });
+  return { ok: true };
+}
+
+async function setPinnedMatchMode(current, id, matchMode) {
+  if (!["url", "site"].includes(matchMode)) {
+    return { ok: false };
+  }
+  const entry = current.pinnedTabs.find(candidate => candidate.id === id);
+  if (!entry) {
+    return { ok: false };
+  }
+  entry.matchMode = matchMode;
+  await save(current);
   await ensurePinnedTabsEverywhere({ force: true });
   return { ok: true };
 }

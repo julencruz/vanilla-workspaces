@@ -85,5 +85,6 @@ form#create-workspace button { border-color: transparent; background: var(--acce
 .pinned-control form button { border-color: transparent; background: var(--accent); color: light-dark(white, #111); font-weight: 650; text-align: center; }
 #pinned-status { min-height: 14px; margin: 0 12px 8px; color: var(--muted); font-size: 11px; }
 #pinned-list { display: grid; gap: 5px; padding: 0 12px 12px; }
+#pinned-list .route-actions button:first-child { white-space: nowrap; font-size: 10px; }
 .backup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 11px 12px 0; }
 #backup-status { min-height: 14px; margin: 8px 12px; color: var(--muted); font-size: 11px; }

@@ -54,7 +54,7 @@ function sanitizeConfig(raw) {
   for (const entry of Array.isArray(source.pinnedTabs) ? source.pinnedTabs : []) {
     const url = typeof entry?.url === "string" ? normalizePinnedUrl(entry.url) : null;
     if (url && !pinnedTabs.some(existing => pinnedKey(existing.url) === pinnedKey(url))) {
-      pinnedTabs.push({ id: crypto.randomUUID(), url });
+      pinnedTabs.push({ id: crypto.randomUUID(), url, matchMode: entry.matchMode === "site" ? "site" : "url" });
     }
   }
   return {

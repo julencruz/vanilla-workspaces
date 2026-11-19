@@ -11,7 +11,7 @@ A minimal Firefox extension for organizing tabs into workspaces, routing links a
 - Prevent duplicate tabs across all workspaces: opening a URL that is already open elsewhere switches to that workspace and tab. Rules can allow duplicates for selected sites.
 - Consolidate duplicate Firefox New Tab, Home, and Private Browsing start pages within each workspace.
 - Switch workspaces and manage favorites with keyboard shortcuts or the command palette. Toggle between the current and previous workspace without cycling through the full list.
-- Keep a global list of pinned tabs (command palette → Pinned tabs). They are created and re-pinned automatically if closed or unpinned, and are shown in every workspace.
+- Keep a global list of pinned tabs (command palette → Pinned tabs). Choose whether each entry matches its exact URL or any URL on the same site. They are created and re-pinned automatically if closed or unpinned, and are shown in every workspace.
 - Export and import your configuration (workspaces, styles, favorites, routes, duplicate rules, pinned tabs) as a JSON file from the command palette. Imports are validated and open tabs are kept.
 - Pause inactivity timers and playing audio/video in tabs of hidden workspaces; both resume when you return.
 - Close tabs that have never been activated after 30 minutes, and tabs left inactive for over two hours. Pinned tabs, favorites, active tabs, and tabs playing audio are kept.

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Vanilla Workspaces",
-  "version": "2.12.0",
+  "version": "2.15.0",
   "description": "Minimal workspaces and duplicate-tab prevention for Firefox.",
   "permissions": [
     "tabs",

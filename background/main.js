@@ -162,6 +162,9 @@ async function focusExistingTab(existing, duplicate) {
   if (!existing.pinned && isWorkspace(current, owner) && owner !== await activeWorkspaceForWindow(current, windowId)) {
     await showWorkspace(owner, windowId);
   }
+  if (existing.pinned && duplicate.url && existing.url !== duplicate.url) {
+    await browser.tabs.update(existing.id, { url: duplicate.url });
+  }
   await browser.tabs.show([existing.id]).catch(() => {});
   await browser.tabs.update(existing.id, { active: true });
   await browser.tabs.remove(duplicate.id).catch(() => {});
@@ -289,6 +292,7 @@ const MESSAGES = {
   "export-config": current => exportConfig(current),
   "import-config": (current, { data }) => importConfig(current, data),
   "add-pinned-tab": (current, { url }) => addPinnedTab(current, url),
+  "set-pinned-match-mode": (current, { id, matchMode }) => setPinnedMatchMode(current, id, matchMode),
   "remove-pinned-tab": (current, { id }) => removePinnedTab(current, id),
   "remove-duplicate-rule": async (current, { id }) => {
     current.duplicateRules = current.duplicateRules.filter(rule => rule.id !== id);

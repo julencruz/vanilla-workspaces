@@ -173,19 +173,30 @@ async function render() {
   for (const entry of state.pinnedTabs || []) {
     const row = document.createElement("div");
     row.className = "route";
+    const meta = document.createElement("span");
+    meta.className = "route-type";
+    meta.textContent = entry.matchMode === "site" ? "Site" : "URL";
     const label = document.createElement("span");
     label.className = "route-value";
     label.textContent = entry.url;
     label.title = entry.url;
     const acts = document.createElement("div");
     acts.className = "route-actions";
+    const matchMode = document.createElement("button");
+    matchMode.type = "button";
+    matchMode.textContent = entry.matchMode === "site" ? "Whole site" : "Exact URL";
+    matchMode.title = "Toggle whether links from this site reuse the pinned tab";
+    matchMode.addEventListener("click", () => send("set-pinned-match-mode", {
+      id: entry.id,
+      matchMode: entry.matchMode === "site" ? "url" : "site",
+    }));
     const remove = document.createElement("button");
     remove.type = "button";
     remove.textContent = "×";
     remove.title = "Stop keeping this tab pinned";
     remove.addEventListener("click", () => send("remove-pinned-tab", { id: entry.id }));
-    acts.append(remove);
-    row.append(label, acts);
+    acts.append(matchMode, remove);
+    row.append(meta, label, acts);
     pinnedList.append(row);
   }
 }

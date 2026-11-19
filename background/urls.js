@@ -19,16 +19,6 @@ function normalizedUrl(url) {
   return parsed.toString();
 }
 
-function globalPinnedOrigins(current) {
-  const origins = new Set();
-  for (const entry of current.pinnedTabs) {
-    try {
-      origins.add(new URL(entry.url).origin);
-    } catch {}
-  }
-  return origins;
-}
-
 function ruleMatches(rule, parsed) {
   switch (rule.type) {
     case "domain":
@@ -50,6 +40,17 @@ function findMatchingRule(rules, url) {
   return rules.find(rule => ruleMatches(rule, parsed));
 }
 
+function pinnedEntryMatchesUrl(entry, url) {
+  try {
+    if (pinnedKey(entry.url) === pinnedKey(url)) {
+      return true;
+    }
+    return entry.matchMode === "site" && new URL(entry.url).origin === new URL(url).origin;
+  } catch {
+    return false;
+  }
+}
+
 function normalizeRuleValue(ruleType, value) {
   if (!value) {
     return null;
@@ -68,7 +69,6 @@ function normalizeRuleValue(ruleType, value) {
 function findDuplicateTab(current, tabs, tab, url, workspace) {
   const startPage = isFirefoxStartPage(url);
   const normalized = startPage ? null : normalizedUrl(url);
-  const pinnedOrigins = startPage ? new Set() : globalPinnedOrigins(current);
   const matches = tabs.filter(candidate => {
     if (candidate.id === tab.id || !candidate.url) {
       return false;
@@ -79,7 +79,8 @@ function findDuplicateTab(current, tabs, tab, url, workspace) {
     if (candidate.url.startsWith("about:")) {
       return false;
     }
-    if (candidate.pinned && pinnedOrigins.has(new URL(candidate.url).origin) && new URL(url).origin === new URL(candidate.url).origin) {
+    if (candidate.pinned && current.pinnedTabs.some(entry =>
+      pinnedEntryMatchesUrl(entry, candidate.url) && pinnedEntryMatchesUrl(entry, url))) {
       return true;
     }
     return normalizedUrl(candidate.url) === normalized;

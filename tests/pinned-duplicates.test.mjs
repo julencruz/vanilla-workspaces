@@ -10,7 +10,7 @@ const browser={
  tabs:{query:async q=>tabs.filter(t=>(!q.windowId||t.windowId===q.windowId)&&(q.active===undefined||t.active===q.active)).map(t=>({...t,hidden:hidden.has(t.id)})),
   remove:async ids=>{ids=[].concat(ids);removed.push(...ids);tabs=tabs.filter(t=>!ids.includes(t.id))},
   create:async o=>{const t={id:nextId++,windowId:o.windowId,index:tabs.length,active:!!o.active,url:o.url};if(o.active)tabs.forEach(x=>x.active=false);tabs.push(t);setTimeout(()=>L.created({...t}),0);return t},
-  update:async(id,o)=>{if(o.active){tabs.forEach(x=>x.active=x.id===id)}},
+  update:async(id,o)=>{const tab=tabs.find(x=>x.id===id);if(tab){Object.assign(tab,o);if(o.active)tabs.forEach(x=>x.active=x.id===id)}},
   show:async ids=>ids.forEach(i=>hidden.delete(i)),hide:async ids=>ids.forEach(i=>{if(tabs.find(t=>t.id===i)?.active)return;hidden.add(i)}),get:async id=>{const t=tabs.find(x=>x.id===id);return t?{...t,hidden:hidden.has(id)}:null},
   onCreated:ev("created"),onRemoved:ev("removed"),onActivated:ev("activated"),onUpdated:ev("updated")},
  scripting:{executeScript:async o=>{scripts.push([o.target.tabId,o.func.name])}},
@@ -31,17 +31,40 @@ const min=60000, now=Date.now();
 
 
 store.workspaces=["General","Work"]; store.tabWorkspaces={1:"General",2:"General"};
-store.pinnedTabs=[{id:"p",url:"https://mail.test/"}];
+store.pinnedTabs=[{id:"p",url:"https://mail.google.com/mail/u/0/#inbox",matchMode:"site"}];
 wv["1vanilla-active-workspace"]="General";
-tabs=[{id:1,windowId:1,index:0,active:true,pinned:false,url:"https://s1.test/"},{id:2,windowId:1,index:1,active:false,pinned:true,url:"https://mail.test/"}];
+tabs=[{id:1,windowId:1,index:0,active:true,pinned:false,url:"https://s1.test/"},{id:2,windowId:1,index:1,active:false,pinned:true,url:"https://mail.google.com/mail/u/0/#inbox"}];
 
 // 1. a normal tab opening a pinned tab's URL is sent to the pinned tab
 const dupe=await browser.tabs.create({windowId:1,url:"about:blank",active:true});
 store.tabWorkspaces[dupe.id]="General";
-await L.updated(dupe.id,{url:"https://mail.test/"},{...dupe,windowId:1,url:"https://mail.test/"});
+await L.updated(dupe.id,{url:"https://mail.google.com/mail/u/0/#inbox"},{...dupe,windowId:1,url:"https://mail.google.com/mail/u/0/#inbox"});
 await new Promise(r=>setTimeout(r,300));
 assert(!tabs.some(t=>t.id===dupe.id),"new tab with a pinned tab's URL is closed");
 assert(tabs.find(t=>t.id===2).active&&tabs.find(t=>t.id===2).pinned,"the pinned tab is activated instead");
+
+// A different URL on the pinned site's origin stays in a regular tab.
+const issueUrl="https://mail.google.com/mail/u/0/#inbox/FMfcgzQjgglfLhMcztDzVlPbnQDfQCZB";
+const issue=await browser.tabs.create({windowId:1,url:"about:blank",active:true});
+store.tabWorkspaces[issue.id]="General";
+await L.updated(issue.id,{url:issueUrl},{...issue,windowId:1,url:issueUrl});
+await new Promise(r=>setTimeout(r,300));
+assert(!tabs.some(t=>t.id===issue.id),"Gmail message link is routed to the pinned tab");
+assert(tabs.find(t=>t.id===2).url===issueUrl,"pinned Gmail tab opens the requested message");
+const beforeEnsure=tabs.length;
+await ctx.ensurePinnedTabs(1,{force:true});
+assert(tabs.length===beforeEnsure,"ensure does not recreate the pinned tab after navigation");
+
+// Unrelated Atlassian paths stay in a normal tab, even when the origin has a pinned board.
+store.pinnedTabs=[{id:"jira",url:"https://glovoapp.atlassian.net/jira/software/c/projects/FPC/boards/734",matchMode:"url"}];
+tabs.push({id:20,windowId:1,index:tabs.length,active:false,pinned:true,url:"https://glovoapp.atlassian.net/jira/software/c/projects/FPC/boards/734"});
+const jiraUrl="https://glovoapp.atlassian.net/browse/FPC-4742?xpis=test";
+const jira=await browser.tabs.create({windowId:1,url:"about:blank",active:true});
+store.tabWorkspaces[jira.id]="General";
+await L.updated(jira.id,{url:jiraUrl},{...jira,windowId:1,url:jiraUrl});
+await new Promise(r=>setTimeout(r,300));
+assert(tabs.some(t=>t.id===jira.id&&!t.pinned),"different Jira route stays in a normal tab");
+assert(tabs.find(t=>t.id===20).url.endsWith("/boards/734"),"pinned Jira board remains unchanged");
 
 // 2. a pinned tab is never closed as a duplicate of another tab
 const other=await browser.tabs.create({windowId:1,url:"about:blank",active:false});

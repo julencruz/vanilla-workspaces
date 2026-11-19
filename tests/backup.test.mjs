@@ -35,7 +35,7 @@ store.workspaceStyles={General:{icon:"G",color:"#112233"},Work:{icon:"W",color:"
 store.workspaceFavorites={Work:[{title:"Docs",url:"https://docs.test/"}]};
 store.trafficRules=[{id:"a",type:"domain",value:"glovoapp.com",workspace:"Work"}];
 store.duplicateRules=[{id:"b",type:"domain",value:"docs.google.com"}];
-store.pinnedTabs=[{id:"c",url:"https://calendar.google.com/"}];
+store.pinnedTabs=[{id:"c",url:"https://calendar.google.com/",matchMode:"site"}];
 store.tabWorkspaces={1:"General",2:"Work"};
 tabs=[1,2].map((id,i)=>({id,windowId:1,index:i,active:id===1,url:`https://s${id}.test`}));
 wv["1vanilla-active-workspace"]="General";
@@ -53,7 +53,7 @@ assert(store.workspaceStyles.Work.color==="#445566"&&store.workspaceStyles.Gener
 assert(store.workspaceFavorites.Work[0].url==="https://docs.test/","favorites restored");
 assert(store.trafficRules.length===1&&store.trafficRules[0].workspace==="Work","routes restored");
 assert(store.duplicateRules.length===1,"duplicate rules restored");
-assert(store.pinnedTabs.length===1&&tabs.some(t=>t.url==="https://calendar.google.com/"&&t.pinned),"pinned tab restored and created");
+assert(store.pinnedTabs.length===1&&store.pinnedTabs[0].matchMode==="site"&&tabs.some(t=>t.url==="https://calendar.google.com/"&&t.pinned),"pinned tab and match mode restored");
 
 // bad inputs
 const before=JSON.stringify(store);
