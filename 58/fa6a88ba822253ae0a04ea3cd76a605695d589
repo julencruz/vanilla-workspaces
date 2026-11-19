@@ -1,0 +1,63 @@
+background/urls.js
+  s_00d0f73575ae3c::t_51750b9fb59947 1-84
+  s_00d0f73575ae3c::t_f3d1cef0107f88 85-87
+background/main.js
+  s_00d0f73575ae3c::t_1c288e5532b175 1-2,4-7,10,12-21,24-40,43,45-56,58-65,70,72,75-79,81-87,92-94,96-97,100,103-106,113,116-117,119-122,124,126,128,130-134,136,138-140,142,144-147,149-151,153-154,156,158,160-167,170-173,175-179,182-183,185-186,188-191,199-205,207,217-218,222-225,227-236,238-241,245-248,250-254,256-257,259-263,265-269,271-273,275,277-285,288-294,297-306,308-312,318
+  s_00d0f73575ae3c::t_785dea6acd5f9f 319-321
+palette.js
+  s_00d0f73575ae3c::t_b0a430a83aa0ec 173
+  s_00d0f73575ae3c::t_6b994ab8350d5a 72
+  s_00d0f73575ae3c::t_dd5801f54e0831 75,79
+  s_00d0f73575ae3c::t_f031992898d367 29,36,62,73,77,187,229
+  s_00d0f73575ae3c::t_97b1813cfad9c6 213
+  s_00d0f73575ae3c::t_a353244fdf8fce 172
+  s_00d0f73575ae3c::t_0cd43b167e69e6 174-176,184-186
+  s_00d0f73575ae3c::t_c92ace6cf81c6d 188-190
+background/state.js
+  s_00d0f73575ae3c::t_ad82edc624b0d5 1-96
+background/activity.js
+  s_00d0f73575ae3c::t_65cef4f5162f36 1-110
+popup.js
+  s_00d0f73575ae3c::t_f07a982be0f396 24-28,49,110
+  s_00d0f73575ae3c::t_3cdc6d3b5ed82e 61-90
+  s_00d0f73575ae3c::t_d55cfdddc72e4d 19,22-23,30,129,155,184
+  s_00d0f73575ae3c::t_b1e0166c73d3d6 20-21
+  s_00d0f73575ae3c::t_19022f1e3e6a51 29
+  s_00d0f73575ae3c::t_d07f64bc5b595c 31-33,46-48
+  s_00d0f73575ae3c::t_39eebe2588eeeb 50-52,58-60
+  s_00d0f73575ae3c::t_b9b2a9b633c333 91-93,107-109
+  s_00d0f73575ae3c::t_6e3fd902a4e361 111-113
+README.md
+  s_00d0f73575ae3c::t_dc30f54b355cb4 9
+  s_00d0f73575ae3c::t_c7572a325a4395 14
+  s_00d0f73575ae3c::t_6b994ab8350d5a 13
+  s_00d0f73575ae3c::t_6079a92b198d3e 12
+  s_00d0f73575ae3c::t_2eca555a3952ff 11
+  s_00d0f73575ae3c::t_21a45b4d80c680 15
+  s_00d0f73575ae3c::t_b2608e0fe5cb63 8
+  s_00d0f73575ae3c::t_76cadf7df4fec7 16-17
+manifest.json
+  s_00d0f73575ae3c::t_1cd3eabc9922c8 4,6-14,16-24,41,66-68,71-72
+  s_00d0f73575ae3c::t_f4ddb3a8b37ae7 73-74
+background/workspaces.js
+  s_00d0f73575ae3c::t_12d573d32aa177 1-103,105-287,290-292
+  s_00d0f73575ae3c::t_025c7a0e5bb28c 104
+  s_00d0f73575ae3c::t_60349c1cfc6ccc 288-289
+  s_00d0f73575ae3c::t_4797d010b32841 293-295
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "58fa6a88ba822253ae0a04ea3cd76a605695d589",
+  "prompts": {},
+  "sessions": {
+    "s_00d0f73575ae3c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_e16cda1c8ffeCAMegLWoEYiQOy",
+        "model": "gpt-6-luna"
+      },
+      "human_author": "Julen Cruz <139287155+julencruz@users.noreply.github.com>"
+    }
+  }
+}
